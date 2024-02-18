@@ -1,0 +1,45 @@
+.fa-brands{
+    color: blue;
+    font-size: 38px;
+}
+.nav-logo p{
+    font-size: 25px;
+    font-weight: 800;
+}
+.nav-logo{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.fa-solid{
+    font-size: 35px;
+}
+span{
+    font-size: 15px;
+}
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 60px;
+    box-shadow: 0 1px 3px -2px #000;
+    margin-bottom: 1px;
+    background: white;
+}
+@media(max-width:800px){
+    .navbar{
+        padding: 15px 30px;
+    }
+    .nav-logo p{
+        font-size: 20px;
+    }
+    span{
+        font-size: 10px;
+    }
+    .fa-brands{
+        font-size: 25px;
+    }
+    .fa-solid{
+        font-size: 28px;
+    }
+}

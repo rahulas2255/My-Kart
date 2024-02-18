@@ -13,7 +13,7 @@ function ShopCategory(props) {
             <span>Showing 1-12</span> out of 36 products
         </p>
         <div className="shopcategory-sort">
-            Sort by <i class="fa-solid fa-caret-down"></i>
+            Sort by <i className="fa-solid fa-caret-down"></i>
         </div>
       </div>
       <div className="shopcategory-products">

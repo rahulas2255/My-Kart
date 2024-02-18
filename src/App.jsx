@@ -11,8 +11,13 @@ import Footer from './Components/Footer/Footer'
 import men_banner from './Components/Assets/banner_mens.png'
 import women_banner from './Components/Assets/banner_women.png'
 import kid_banner from './Components/Assets/banner_kids.png'
+import Admin from './Pages/Admin/Admin'
+import { useAdminContext } from './Context/AdminContext'
+
+
 
 const App = ()=> {
+  const {isAdmin} = useAdminContext()
 
   return (
     <>
@@ -29,6 +34,8 @@ const App = ()=> {
         </Route>
         <Route path='/cart' element={<Cart/>}/>
         <Route path='/login' element={<LoginSignup/>}/>
+        <Route path='/admin' element={isAdmin?<Admin/>:<Shop/>}/>
+          
       </Routes>
       <Footer/>
     </BrowserRouter>

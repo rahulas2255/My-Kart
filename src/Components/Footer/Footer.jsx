@@ -5,7 +5,7 @@ const Footer = ()=> {
   return (
     <div className='footer'>
         <div className="footer-logo">
-        <i class="fa-brands fa-opencart"></i>
+        <i className="fa-brands fa-opencart"></i>
         <p>My-kart</p>
         </div>
         <ul className='footer-links'>
@@ -17,9 +17,9 @@ const Footer = ()=> {
         </ul>
         <div className="footer-social-icons">
             <div className="footer-icons-container">
-            <i class="fa-brands fa-instagram"></i>
-            <i class="fa-brands fa-pinterest"></i>
-            <i class="fa-brands fa-whatsapp"></i>
+            <i className="fa-brands fa-instagram"></i>
+            <i className="fa-brands fa-pinterest"></i>
+            <i className="fa-brands fa-whatsapp"></i>
             </div>
         </div>
         <div className="footer-copyright">

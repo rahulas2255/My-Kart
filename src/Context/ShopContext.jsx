@@ -1,7 +1,11 @@
-import React,{createContext, useEffect} from 'react'
+import React,{createContext, useEffect,useContext} from 'react'
 import { useState } from 'react';
+import { SERVER_URL } from '../serverURL';
 
 export const ShopContext = createContext(null);
+export const useShopContext =()=>{
+    return useContext(ShopContext)
+}
 
 const getDefaultCart =()=>{
     let cart = {};
@@ -20,12 +24,19 @@ const ShopContextProvider = (props)=>{
     const [cartItems,setCartItems] = useState(getDefaultCart())
 
     useEffect(()=>{
-        fetch('http://localhost:4000/allproducts')
+        getAllProduct()
+    },[])
+
+
+
+    
+    const getAllProduct =()=>{
+        fetch(`${SERVER_URL}/allproducts`)
         .then((response)=>response.json())
         .then((data)=>setAll_Product(data))
 
         if(localStorage.getItem('auth-token')){
-            fetch('http://localhost:4000/getcart',{
+            fetch(`${SERVER_URL}/getcart`,{
                 method:'POST',
                 headers:{
                     Accept:'application/form-data',
@@ -37,13 +48,13 @@ const ShopContextProvider = (props)=>{
             }).then((response)=>response.json())
             .then((data)=>setCartItems(data))
         }
-    },[])
+    }
 
     
     const addToCart = (itemId) => {
         setCartItems((prev)=>({...prev,[itemId]:prev[itemId]+1}))
         if(localStorage.getItem('auth-token')){
-            fetch('http://localhost:4000/addtocart',{
+            fetch(`${SERVER_URL}/addtocart`,{
                 method:'POST',
                 headers:{
                     Accept:'application/json',
@@ -59,7 +70,7 @@ const ShopContextProvider = (props)=>{
     const removeFromCart = (itemId) => {
         setCartItems((prev)=>({...prev,[itemId]:prev[itemId]-1}))
         if(localStorage.getItem('auth-token')){
-            fetch('http://localhost:4000/removefromcart',{
+            fetch(`${SERVER_URL}/removefromcart`,{
                 method:'POST',
                 headers:{
                     Accept:'application/json',
@@ -97,8 +108,24 @@ const ShopContextProvider = (props)=>{
         }
         return totalItem
     }
-    const contextValue = {getTotalCartItems,getTotalCartAmount,all_product,cartItems,addToCart,removeFromCart};
-    console.log(getTotalCartAmount,"cartitem");
+    const clearCart = ()=> {
+        setCartItems(getDefaultCart())
+        if(localStorage.getItem('auth-token')){
+            fetch(`${SERVER_URL}/clearcart`,{
+                method:'DELETE',
+                headers:{
+                    Accept:'application/json',
+                    'auth-token':`${localStorage.getItem('auth-token')}`,
+                    'Content-type':'application/json',
+                },
+            })
+            .then((response)=>response.json())
+            .then((data)=>console.log("Delete data",data))
+            .catch((err)=>console.log("error clear",err))
+        }
+    }
+    
+    const contextValue = {getTotalCartItems,getTotalCartAmount,all_product,cartItems,addToCart,removeFromCart,setAll_Product,getAllProduct,clearCart};
 
 
     return (

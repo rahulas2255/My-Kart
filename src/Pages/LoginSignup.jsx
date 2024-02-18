@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import './CSS/LoginSignup.css'
-
+import { useAdminContext } from '../Context/AdminContext';
+import { useNavigate } from 'react-router-dom';
+import { SERVER_URL } from '../serverURL';
 function LoginSignup() {
-
+  const navigate = useNavigate()
   const [state,setState] = useState("Login");
   const [formData,setFormData] = useState({
     username:"",
@@ -13,11 +15,13 @@ function LoginSignup() {
   const changeHandler = (e)=>{
     setFormData({...formData,[e.target.name]:e.target.value})
   }
-
+  const {isAdmin,setIsAdmin} = useAdminContext()
+  console.log("Is aDmin",isAdmin);
+  
   const login = async ()=>{
     console.log("Login Function executed",formData);
     let responseData;
-    await fetch('http://localhost:4000/login',{
+    await fetch(`${SERVER_URL}/login`,{
       method:'POST',
       headers:{
         Accept:'application/form-data',
@@ -28,7 +32,13 @@ function LoginSignup() {
 
     if(responseData.success){
       localStorage.setItem('auth-token',responseData.token);
-      window.location.replace("/");
+      localStorage.setItem('admin',responseData.user?.admin);
+      if(responseData.user?.admin){
+        setIsAdmin(true)
+        navigate("/admin")
+      }else{
+        window.location.replace("/");
+      }
     }else{
       alert(responseData.errors)
     }
@@ -37,7 +47,7 @@ function LoginSignup() {
   const signup = async ()=>{
     console.log("Sign Up Function executed",formData);
     let responseData;
-    await fetch('http://localhost:4000/signup',{
+    await fetch(`${SERVER_URL}/signup`,{
       method:'POST',
       headers:{
         Accept:'application/form-data',

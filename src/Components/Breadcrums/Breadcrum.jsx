@@ -10,7 +10,7 @@ const Breadcrum =(props) => {
     
   return (
     <div className='breadcrum'>
-        Home <i className="fa-solid fa-chevron-right"></i> SHOP <i className="fa-solid fa-chevron-right"></i> {product?.category} <i className="fa-solid fa-chevron-right"></i> {product.name}
+        Home <i classNameName="fa-solid fa-chevron-right"></i> SHOP <i classNameName="fa-solid fa-chevron-right"></i> {product?.category} <i classNameName="fa-solid fa-chevron-right"></i> {product.name}
     </div>
   )
 }

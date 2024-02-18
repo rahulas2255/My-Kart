@@ -1,6 +1,6 @@
 .hero{
     height: 100vh;
-    background: linear-gradient(180deg, #6f8cea, #e1ffea22 60%);
+    background: hsl(226, 75%, 68%);
     display: flex;
 }
 .hero-left{
