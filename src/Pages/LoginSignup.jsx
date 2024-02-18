@@ -66,6 +66,10 @@ function LoginSignup() {
 
   return (
     <div className='loginsignup'>
+      <div style={{marginLeft:'15px',marginBottom:'0px'}}>
+        <h3>Admin Panel Login: <br /> u: admin@gmail.com <br /> p: admin</h3>
+        <h3>Dummy credentials: <br /> u: rahul@gmail.com <br /> p: 12345 </h3>
+      </div>
       <div className="loginsignup-container">
         <h1>{state}</h1>
         <div className="loginsignup-fields">
